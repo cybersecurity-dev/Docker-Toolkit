@@ -2,8 +2,13 @@ FROM ubuntu:latest
 
 SHELL ["/bin/bash", "-c"]
 
+RUN mkdir -p /src && mkdir -p /src_pcap
+
 # Add conda env
 COPY conda_workspace_pcap.yml /tmp
+COPY convert_from_pcap_to_csv.py /src
+COPY GeoLite2-City.mmdb /src
+COPY dir_pcap /src_pcap
 
 # Install base utilities
 RUN apt-get update \
@@ -21,10 +26,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
-RUN cat /tmp/conda_workspace_pcap.yml
-
 RUN conda env create -f /tmp/conda_workspace_pcap.yml
 
 SHELL ["conda", "run", "--no-capture-output", "-n", "workspace_pcap", "/bin/bash", "-c"]
 
-CMD conda env list
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "workspace_pcap", "python3", "/src/convert_from_pcap_to_csv.py", "/src_pcap/", "/src_pcap_ext/", "True"]
+
+#after conda activate workspace_pcap
+#CMD ["python3", "/src/convert_from_pcap_to_csv.py", "/src_pcap/", "/src_pcap_ext/", "True"]
