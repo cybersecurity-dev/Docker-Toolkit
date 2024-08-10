@@ -1,0 +1,23 @@
+name: workspace_pcap
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+dependencies:
+  - python=3.12.5
+  - numpy=1.26.4
+  - pandas=2.2.2
+  - scapy=2.5.0
+  - pyshark=0.6
+  - matplotlib=3.8.4
+  - requests=2.32.3
+  - bs4=4.12.3
+  - cryptography=41.0.3
+  - libgcrypt=1.11.0
+  - libxcrypt=4.4.36
+  - openssl=3.3.1
+  - scipy=1.13.1
+  - beautifulsoup4=4.12.3
+  - seaborn=0.13.2
+  - geoip2=4.8.0
+  - ydata-profiling=4.9.0
