@@ -1,0 +1,11 @@
+name: workspace_autokeras_gpu
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+dependencies:
+  - python=3.11
+  - pip=24.2
+  - tensorflow-gpu=2.16
+  - pip:
+    - autokeras
