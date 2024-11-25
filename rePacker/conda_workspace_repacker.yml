@@ -1,0 +1,9 @@
+name: workspace_repacker
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+dependencies:
+  - python
+  - pip
+  - capstone
