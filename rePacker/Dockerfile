@@ -4,7 +4,7 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OPT=/opt
 ENV TMP=/tmp
-
+ENV CONDA_DIR=/opt/conda
 
 RUN mkdir -p $OPT $TMP
 COPY conda_workspace_repacker.yml $TMP/
@@ -22,9 +22,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install miniconda
-ENV CONDA_DIR=/opt/conda
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p $OPT/conda
+    /bin/bash ~/miniconda.sh -b -p $CONDA_DIR
 
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
