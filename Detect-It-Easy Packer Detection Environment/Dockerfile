@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+LABEL maintainer="Cyber Threat Defence Center"
+
 SHELL ["/bin/bash", "-c"]
 
 RUN mkdir -p /src && mkdir -p die_lin64_portable/base/db
