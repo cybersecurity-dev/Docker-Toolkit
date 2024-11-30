@@ -1,0 +1,21 @@
+FROM alpine:latest
+
+LABEL maintainer="Cyber Threat Defence Center"
+
+RUN apk add --no-cache openssh-server
+
+RUN sed -i 's/#*X11Forwarding.*/X11Forwarding yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#*X11UseLocalhost.*/X11UseLocalhost no/' /etc/ssh/sshd_config
+
+ARG USERNAME=duser
+ARG PASSWORD=dx2025
+
+RUN adduser -D "$USERNAME" && \
+    echo "$USERNAME:$PASSWORD" | chpasswd
+
+# Generate host keys
+RUN ssh-keygen -A
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
