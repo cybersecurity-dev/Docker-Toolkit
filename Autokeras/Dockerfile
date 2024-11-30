@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+LABEL maintainer="Cyber Threat Defence Center"
+
 SHELL ["/bin/bash", "-c"]
 
 # Add conda env

@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+LABEL maintainer="Cyber Threat Defence Center"
+
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OPT=/opt
