@@ -1,0 +1,21 @@
+FROM ubuntu:latest
+
+RUN apt-get update \ 
+    && apt-get install -y openssh-server \
+    && mkdir /var/run/sshd
+
+RUN sed -i 's/#*X11Forwarding.*/X11Forwarding yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#*X11UseLocalhost.*/X11UseLocalhost no/' /etc/ssh/sshd_config
+
+ARG USERNAME=duser
+ARG PASSWORD=dx2025
+
+RUN useradd -m -s /bin/bash "$USERNAME" && \
+    echo "$USERNAME:$PASSWORD" | chpasswd
+
+# Generate host keys
+RUN ssh-keygen -A
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
