@@ -6,4 +6,5 @@ channels:
 dependencies:
   - python
   - pip
-  - capstone
+  - pyinstaller
+  - nuitka
