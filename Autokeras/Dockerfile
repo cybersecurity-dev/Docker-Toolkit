@@ -2,10 +2,15 @@ FROM ubuntu:latest
 
 LABEL maintainer="Cyber Threat Defence Center"
 
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OPT=/opt
+ENV TMP=/tmp
+
 SHELL ["/bin/bash", "-c"]
 
 # Add conda env
-COPY conda_workspace_autokeras_cpu.yml /tmp
+COPY conda_workspace_autokeras_cpu.yml $TMP/
 
 # Install base utilities
 RUN apt-get update \
@@ -24,7 +29,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
-RUN conda env create -f /tmp/conda_workspace_autokeras_cpu.yml
+RUN conda init \
+    && conda env create -f $TMP/conda_workspace_autokeras_cpu.yml \
+    && echo "source activate workspace_autokeras_cpu" >> ~/.bashrc     # Activate the environment
+
+ENV PATH $CONDA_DIR/envs/workspace_autokeras_cpu/bin:$PATH
 
 SHELL ["conda", "run", "--no-capture-output", "-n", "workspace_autokeras_cpu", "/bin/bash", "-c"]
-
