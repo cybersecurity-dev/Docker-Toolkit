@@ -2,6 +2,11 @@ FROM ubuntu:20.04
 
 LABEL maintainer="Cyber Threat Defence Center"
 
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OPT=/opt
+ENV TMP=/tmp
+
 SHELL ["/bin/bash", "-c"]
 
 RUN mkdir -p /src && mkdir -p die_lin64_portable/base/db
@@ -14,10 +19,10 @@ RUN apt-get update -qq && apt-get upgrade -y && apt install -y wget tar libglib2
     && rm -rf /var/lib/apt/lists/*
 
 RUN cd /src && git clone https://github.com/horsicq/Detect-It-Easy
+
 RUN wget https://github.com/horsicq/DIE-engine/releases/download/3.10/die_3.10_portable_Ubuntu_20.04_amd64.tar.gz \
     && tar -xzf die_3.10_portable_Ubuntu_20.04_amd64.tar.gz
     
-
 # db update
 RUN rm -rf /die_lin64_portable/base/db
 RUN cp -r /src/Detect-It-Easy/db /die_lin64_portable/base/db
