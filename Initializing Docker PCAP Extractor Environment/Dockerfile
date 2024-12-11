@@ -28,7 +28,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
-RUN conda env create -f /tmp/conda_workspace_pcap.yml
+RUN conda init \
+    && conda env create -f $TMP/conda_workspace_pcap.yml \
+    && echo "source activate workspace_pcap" >> ~/.bashrc     # Activate the environment
+
+ENV PATH $CONDA_DIR/envs/workspace_pcap/bin:$PATH
 
 SHELL ["conda", "run", "--no-capture-output", "-n", "workspace_pcap", "/bin/bash", "-c"]
 
