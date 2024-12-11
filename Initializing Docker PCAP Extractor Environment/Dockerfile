@@ -2,6 +2,11 @@ FROM ubuntu:latest
 
 LABEL maintainer="Cyber Threat Defence Center"
 
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OPT=/opt
+ENV TMP=/tmp
+
 SHELL ["/bin/bash", "-c"]
 
 RUN mkdir -p /src && mkdir -p /src_pcap
