@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+LABEL maintainer="Cyber Threat Defence Center"
+
 RUN apt-get update \
     && apt-get install -y net-tools \
     && apt-get install -y openssh-server \
