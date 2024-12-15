@@ -2,6 +2,11 @@ FROM ubuntu:latest
 
 LABEL maintainer="Cyber Threat Defence Center"
 
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OPT=/opt
+ENV TMP=/tmp
+
 RUN apt-get update \
     && apt-get install -y net-tools \
     && apt-get install -y openssh-server \
