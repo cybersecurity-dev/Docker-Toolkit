@@ -2,6 +2,10 @@ FROM alpine:latest
 
 LABEL maintainer="Cyber Threat Defence Center"
 
+# Set environment variables
+ENV OPT=/opt
+ENV TMP=/tmp
+
 RUN apk add --no-cache openssh-server
 
 RUN sed -i 's/#*X11Forwarding.*/X11Forwarding yes/' /etc/ssh/sshd_config
