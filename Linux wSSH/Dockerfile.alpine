@@ -1,6 +1,10 @@
 FROM alpine:latest
 
-LABEL maintainer="Cyber Threat Defence Center"
+LABEL org.label-schema.name='SSH Server - Alpine' \
+    org.label-schema.usage='https://github.com/cybersecurity-dev' \
+    org.label-schema.url='https://github.com/cybersecurity-dev' \
+    org.label-schema.vendor='https://cyberthreatdefence.com/' \
+    MAINTAINER="Cyber Threat Defence Center"
 
 # Set environment variables
 ENV OPT=/opt
