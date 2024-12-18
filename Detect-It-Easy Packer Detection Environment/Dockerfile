@@ -1,6 +1,10 @@
 FROM ubuntu:20.04
 
-LABEL maintainer="Cyber Threat Defence Center"
+LABEL org.label-schema.name='Packer Detection - Ubuntu' \
+    org.label-schema.usage='https://github.com/cybersecurity-dev' \
+    org.label-schema.url='https://github.com/cybersecurity-dev' \
+    org.label-schema.vendor='https://cyberthreatdefence.com/' \
+    MAINTAINER="Cyber Threat Defence Center"
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
