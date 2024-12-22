@@ -7,7 +7,11 @@ LABEL org.label-schema.name='Autokeras - Ubuntu' \
     MAINTAINER="Cyber Threat Defence Center"
 
 # Set environment variables
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBCONF_NOWARNINGS=yes \
+    DEBIAN_FRONTEND=noninteractive \
+    TERM=xterm-256color \
+    PIP_ROOT_USER_ACTION=ignore
+
 ENV OPT=/opt
 ENV TMP=/tmp
 
@@ -18,6 +22,9 @@ COPY conda_workspace_autokeras_cpu.yml $TMP/
 
 # Install base utilities
 RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y autoremove \
+    && apt-get autoclean \
     && apt-get install -y build-essential \
     && apt-get install -y wget \
     && apt-get install -y git-all \

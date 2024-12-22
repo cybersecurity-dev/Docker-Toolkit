@@ -7,7 +7,10 @@ LABEL org.label-schema.name='Packer Detection - Ubuntu' \
     MAINTAINER="Cyber Threat Defence Center"
 
 # Set environment variables
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBCONF_NOWARNINGS=yes \
+    DEBIAN_FRONTEND=noninteractive \
+    TERM=xterm-256color \
+    PIP_ROOT_USER_ACTION=ignore
 ENV OPT=/opt
 ENV TMP=/tmp
 
@@ -16,7 +19,11 @@ SHELL ["/bin/bash", "-c"]
 RUN mkdir -p /src && mkdir -p die_lin64_portable/base/db
 
 # Install base utilities
-RUN apt-get update -qq && apt-get upgrade -y && apt install -y wget tar libglib2.0-0 \
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y autoremove \
+    && apt-get autoclean \    
+    && apt-get install -y wget tar libglib2.0-0 \
     && apt-get install --quiet --assume-yes linux-headers-generic \
 	&& apt-get install -y git-all libicu66 libpcre2-16-0 libdouble-conversion3 \
     && apt-get clean \

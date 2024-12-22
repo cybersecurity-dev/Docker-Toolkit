@@ -7,11 +7,17 @@ LABEL org.label-schema.name='SSH Server - Ubuntu' \
     MAINTAINER="Cyber Threat Defence Center"
 
 # Set environment variables
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBCONF_NOWARNINGS=yes \
+    DEBIAN_FRONTEND=noninteractive \
+    TERM=xterm-256color
+
 ENV OPT=/opt
 ENV TMP=/tmp
 
 RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y autoremove \
+    && apt-get autoclean \
     && apt-get install -y net-tools \
     && apt-get install -y openssh-server \
     && mkdir /var/run/sshd
