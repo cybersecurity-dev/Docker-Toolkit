@@ -37,5 +37,5 @@ RUN wget https://github.com/horsicq/DIE-engine/releases/download/3.10/die_3.10_p
 # db update
 RUN rm -rf /die_lin64_portable/base/db
 RUN cp -r /src/Detect-It-Easy/db /die_lin64_portable/base/db
+#ENTRYPOINT ["/die_linux_portable/diec.sh"]
 
-ENTRYPOINT ["/die_linux_portable/diec.sh"]
