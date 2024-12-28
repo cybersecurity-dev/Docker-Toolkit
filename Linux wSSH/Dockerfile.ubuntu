@@ -14,12 +14,16 @@ ENV DEBCONF_NOWARNINGS=yes \
 ENV OPT=/opt
 ENV TMP=/tmp
 
-RUN apt-get update \
+# Install base utilities
+RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
+    && apt-get -y install dialog apt-utils \
+    && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y autoremove \
-    && apt-get autoclean \
     && apt-get install -y net-tools \
     && apt-get install -y openssh-server \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \ 
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/run/sshd
 
 RUN sed -i 's/#*X11Forwarding.*/X11Forwarding yes/' /etc/ssh/sshd_config

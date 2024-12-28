@@ -21,15 +21,16 @@ SHELL ["/bin/bash", "-c"]
 COPY conda_workspace_autokeras_cpu.yml $TMP/
 
 # Install base utilities
-RUN apt-get update \
+RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
+    && apt-get -y install dialog apt-utils \
+    && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y autoremove \
-    && apt-get autoclean \
     && apt-get install -y build-essential \
     && apt-get install -y wget \
     && apt-get install -y git-all \
     && apt-get install -y linux-headers-generic \
-    && apt-get clean \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \ 
     && rm -rf /var/lib/apt/lists/*
 
 # Install miniconda

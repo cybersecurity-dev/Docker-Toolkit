@@ -25,13 +25,14 @@ COPY GeoLite2-City.mmdb /src
 COPY dir_pcap /src_pcap
 
 # Install base utilities
-RUN apt-get update \
+RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
+    && apt-get -y install dialog apt-utils \
+    && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y autoremove \
-    && apt-get autoclean \
     && apt-get install -y build-essential \
     && apt-get install -y wget \
-    && apt-get clean \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \ 
     && rm -rf /var/lib/apt/lists/*
 
 

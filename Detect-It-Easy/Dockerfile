@@ -19,14 +19,15 @@ SHELL ["/bin/bash", "-c"]
 RUN mkdir -p /src && mkdir -p die_lin64_portable/base/db
 
 # Install base utilities
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get -y autoremove \
-    && apt-get autoclean \    
+RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
+    && apt-get -y install dialog apt-utils \
+    && apt-get -y update \
+    && apt-get -y upgrade \  
     && apt-get install -y wget tar libglib2.0-0 \
     && apt-get install --quiet --assume-yes linux-headers-generic \
 	&& apt-get install -y git-all libicu66 libpcre2-16-0 libdouble-conversion3 \
-    && apt-get clean \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \ 
     && rm -rf /var/lib/apt/lists/*
 
 RUN cd /src && git clone https://github.com/horsicq/Detect-It-Easy
