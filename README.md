@@ -1,5 +1,5 @@
 # docker-toolkit
-Reusable Docker Scripting Toolkit for Development Environment Setup
+Reusable Docker Toolkit Scripting for Development Environment
 
 ## :clipboard: Autokeras
 
@@ -8,7 +8,7 @@ Reusable Docker Scripting Toolkit for Development Environment Setup
 Building the image:
 
 ```console
-# docker build . -t cyberthreatdefense/autokeras
+# docker build . --file Dockerfile --tag cyberthreatdefense/autokeras
 [...]
 <<<wait for a while>>>
 [...]
@@ -19,6 +19,9 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 ```console
 # docker run -it -h autokeras -v `pwd`:/mnt/share cyberthreatdefense/autokeras
 ```
+```powershell
+# docker run -it -h autokeras -v ${PWD}:/mnt/share cyberthreatdefense/autokeras
+```
 
 ## :clipboard: Detect-It-Easy
 
@@ -27,7 +30,7 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 Building the image:
 
 ```console
-# docker build . -t cyberthreatdefense/diec
+# docker build . --file Dockerfile --tag cyberthreatdefense/diec
 [...]
 <<<wait for a while>>>
 [...]
@@ -38,6 +41,9 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 ```console
 # docker run -it -h diec -v `pwd`:/mnt/share cyberthreatdefense/diec
 ```
+```powershell
+# docker run -it -h diec -v ${PWD}:/mnt/share cyberthreatdefense/diec
+```
 
 ## :clipboard: PCAP Extractor
 
@@ -46,7 +52,7 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 Building the image:
 
 ```console
-# docker build . -t cyberthreatdefense/pcap-extractor
+# docker build . --file Dockerfile --tag cyberthreatdefense/pcap-extractor
 [...]
 <<<wait for a while>>>
 [...]
@@ -56,4 +62,7 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 
 ```console
 # docker run -it -h pcap-extractor -v `pwd`:/mnt/share cyberthreatdefense/pcap-extractor
+```
+```powershell
+# docker run -it -h pcap-extractor -v ${PWD}:/mnt/share cyberthreatdefense/pcap-extractor
 ```
