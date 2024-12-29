@@ -67,6 +67,29 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 # docker run -it -h pcap-extractor -v ${PWD}:/mnt/share cyberthreatdefense/pcap-extractor
 ```
 
+## :clipboard: ML Malware Detection Competition/MalConv-Keras Malware Analysis Environment
+
+### :fast_forward: Quick Start
+
+Building the image:
+
+```console
+# docker build . --file Dockerfile --tag cyberthreatdefense/malconv-keras-malware-benchmark
+[...]
+<<<wait for a while>>>
+[...]
+```
+
+Starting it up with the current working directory mounted as `/mnt/share` in the container:
+
+```console
+# docker run -it -h malconv-keras-malware-benchmark -v `pwd`:/mnt/share cyberthreatdefense/malconv-keras-malware-benchmark
+```
+```powershell
+# docker run -it -h malconv-keras-malware-benchmark -v ${PWD}:/mnt/share cyberthreatdefense/malconv-keras-malware-benchmark
+```
+
+
 ## :clipboard: ML Malware Detection Competition/EMBER Malware Analysis Environment
 
 ### :fast_forward: Quick Start
