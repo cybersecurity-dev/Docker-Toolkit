@@ -20,7 +20,6 @@ RUN mkdir -p /src && mkdir -p die_lin64_portable/base/db
 
 # Install base utilities
 RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
-    && apt-get -y install dialog apt-utils \
     && apt-get -y update \
     && apt-get -y upgrade \  
     && apt-get install -y wget tar libglib2.0-0 \
@@ -39,4 +38,3 @@ RUN wget https://github.com/horsicq/DIE-engine/releases/download/3.10/die_3.10_p
 RUN rm -rf /die_lin64_portable/base/db
 RUN cp -r /src/Detect-It-Easy/db /die_lin64_portable/base/db
 #ENTRYPOINT ["/die_linux_portable/diec.sh"]
-
