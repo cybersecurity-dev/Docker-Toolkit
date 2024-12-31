@@ -1,0 +1,39 @@
+FROM ubuntu:latest
+
+LABEL org.label-schema.name='Manalyze - Ubuntu' \
+    org.label-schema.usage='https://github.com/cybersecurity-dev' \
+    org.label-schema.url='https://github.com/cybersecurity-dev' \
+    org.label-schema.vendor='https://cyberthreatdefence.com/' \
+    MAINTAINER="Cyber Threat Defence Center"
+
+# Set environment variables
+ENV DEBCONF_NOWARNINGS=yes \
+    DEBIAN_FRONTEND=noninteractive \
+    TERM=xterm-256color \
+    PIP_ROOT_USER_ACTION=ignore
+
+    ENV OPT=/opt
+ENV TMP=/tmp
+
+SHELL ["/bin/bash", "-c"]
+
+RUN mkdir -p /src && mkdir -p die_lin64_portable/base/db
+
+# Install base utilities
+RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
+    && apt-get -y update \
+    && apt-get -y upgrade \  
+    && apt-get install -y libboost-regex-dev libboost-program-options-dev libboost-system-dev libboost-filesystem-dev \
+    && apt-get install --quiet --assume-yes linux-headers-generic \
+	&& apt-get install -y  libssl-dev build-essential cmake git \
+    && apt-get -y autoremove \
+    && apt-get -y autoclean \ 
+    && rm -rf /var/lib/apt/lists/*
+
+RUN cd /src && git clone https://github.com/JusticeRage/Manalyze.git \
+    && cd Manalyze && cmake . && make -j5 && cd bin \
+    && ln -s /src/Manalyze/bin/manalyze /bin/manalyze
+
+RUN mkdir -p /etc/manalyze \
+    && cp /src/Manalyze/bin/manalyze.conf /etc/manalyze/manalyze.conf \
+    && manalyze --version
