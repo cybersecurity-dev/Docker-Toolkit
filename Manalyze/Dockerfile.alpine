@@ -14,7 +14,8 @@ ENV SRC=/src
 # Install base utilities
 RUN apk update \
     && apk add --no-cache boost-dev cmake make g++ git libressl \
-    && apk add boost-regex boost-program_options boost-system boost-filesystem
+    && apk add boost-regex boost-program_options boost-system boost-filesystem \
+    && apk add openssl-dev build-base
 
 # Clone and build Manalyze
 RUN mkdir $SRC && cd $SRC \
