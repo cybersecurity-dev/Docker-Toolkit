@@ -1,0 +1,30 @@
+FROM alpine:latest
+
+LABEL org.label-schema.name='Manalyze - Alpine' \
+    org.label-schema.usage='https://github.com/cybersecurity-dev' \
+    org.label-schema.url='https://github.com/cybersecurity-dev' \
+    org.label-schema.vendor='https://cyberthreatdefence.com/' \
+    MAINTAINER="Cyber Threat Defence Center"
+
+# Set environment variables
+ENV OPT=/opt
+ENV TMP=/tmp
+ENV SRC=/src
+
+# Install base utilities
+RUN apk update \
+    && apk add --no-cache boost-dev cmake make g++ git libressl \
+    && apk add boost-regex boost-program_options boost-system boost-filesystem
+
+# Clone and build Manalyze
+RUN mkdir $SRC && cd $SRC \
+    && git clone https://github.com/JusticeRage/Manalyze.git \
+    && cd Manalyze \
+    && cmake . \
+    && make -j5 \
+    && cd / \
+    && ln -s /src/Manalyze/bin/manalyze /bin/manalyze \
+    && manalyze --version
+
+RUN mkdir -p /etc/manalyze \
+    && cp /src/Manalyze/bin/manalyze.conf /etc/manalyze/manalyze.conf
