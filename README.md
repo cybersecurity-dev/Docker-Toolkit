@@ -45,6 +45,40 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 # docker run -it -h diec -v ${PWD}:/mnt/share cyberthreatdefense/diec
 ```
 
+## :clipboard: Manalyze
+
+### :fast_forward: Quick Start
+
+Building the image:
+
+```console
+# docker build . --file Dockerfile.ubuntu --tag cyberthreatdefense/manalyze-ubuntu
+[...]
+<<<wait for a while>>>
+[...]
+```
+```console
+# docker build . --file Dockerfile.alpine --tag cyberthreatdefense/manalyze-alpine
+[...]
+<<<wait for a while>>>
+[...]
+```
+
+Starting it up with the current working directory mounted as `/mnt/share` in the container:
+
+```console
+# docker run -it -h manalyze-ubuntu -v `pwd`:/mnt/share cyberthreatdefense/manalyze-ubuntu
+```
+```powershell
+# docker run -it -h manalyze-ubuntu -v ${PWD}:/mnt/share cyberthreatdefense/manalyze-ubuntu
+```
+```console
+# docker run -it -h manalyze-alpine -v `pwd`:/mnt/share cyberthreatdefense/manalyze-alpine
+```
+```powershell
+# docker run -it -h manalyze-alpine -v ${PWD}:/mnt/share cyberthreatdefense/manalyze-alpine
+```
+
 ## :clipboard: PCAP Extractor
 
 ### :fast_forward: Quick Start
