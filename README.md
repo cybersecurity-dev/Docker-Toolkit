@@ -10,19 +10,29 @@ Reusable Docker Toolkit Scripting for Development Environment
 Building the image:
 
 ```console
-# docker build . --file Dockerfile --tag cyberthreatdefense/autokeras
+docker build . --file Dockerfile --tag cyberthreatdefense/autokeras
 [...]
 <<<wait for a while>>>
 [...]
 ```
+or Pull the Image:
+
+```console
+docker pull cyberthreatdefense/autokeras
+```
 
 Starting it up with the current working directory mounted as `/mnt/share` in the container:
 
-```console
-# docker run -it -h autokeras -v `pwd`:/mnt/share cyberthreatdefense/autokeras
+```bash
+docker run -it -h --name autokeras -v `pwd`:/mnt/share cyberthreatdefense/autokeras
 ```
 ```powershell
-# docker run -it -h autokeras -v ${PWD}:/mnt/share cyberthreatdefense/autokeras
+docker run -it -h --name autokeras -v ${PWD}:/mnt/share cyberthreatdefense/autokeras
+```
+
+Start the container
+```console
+docker start -i autokeras
 ```
 
 ## :clipboard: Detect-It-Easy
