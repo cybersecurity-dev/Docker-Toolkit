@@ -42,19 +42,30 @@ docker start -i autokeras
 Building the image:
 
 ```console
-# docker build . --file Dockerfile --tag cyberthreatdefense/diec
+docker build . --file Dockerfile --tag cyberthreatdefense/diec
 [...]
 <<<wait for a while>>>
 [...]
 ```
 
-Starting it up with the current working directory mounted as `/mnt/share` in the container:
+or Pull the Image:
 
 ```console
-# docker run -it -h diec -v `pwd`:/mnt/share cyberthreatdefense/diec
+docker pull cyberthreatdefense/diec
+```
+
+Starting it up with the current working directory mounted as `/mnt/share` in the container:
+
+```bash
+docker run -it -h --name diec -v `pwd`:/mnt/share cyberthreatdefense/diec
 ```
 ```powershell
-# docker run -it -h diec -v ${PWD}:/mnt/share cyberthreatdefense/diec
+docker run -it -h --name diec -v ${PWD}:/mnt/share cyberthreatdefense/diec
+```
+
+Start the container
+```console
+docker start -i diec
 ```
 
 ## :clipboard: Manalyze
