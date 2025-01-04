@@ -34,6 +34,7 @@ Start the container
 ```console
 docker start -i autokeras
 ```
+<img src="./assets/bar.gif">
 
 ## :clipboard: Detect-It-Easy
 
@@ -67,6 +68,8 @@ Start the container
 ```console
 docker start -i diec
 ```
+
+<img src="./assets/bar.gif"> 
 
 ## :clipboard: Manalyze
 
@@ -126,6 +129,9 @@ Start the container
 docker start -i manalyze-ubuntu
 ```
 
+<img src="./assets/bar.gif"> 
+
+
 ## :clipboard: PCAP Extractor
 
 ### :fast_forward: Quick Start
@@ -159,6 +165,9 @@ Start the container
 docker start -i pcap-extractor
 ```
 
+<img src="./assets/bar.gif"> 
+
+
 ## :clipboard: ML Malware Detection Competition/MalConv-Keras Malware Analysis Environment
 
 ### :fast_forward: Quick Start
@@ -180,6 +189,8 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 ```powershell
 # docker run -it -h malconv-keras-malware-benchmark -v ${PWD}:/mnt/share cyberthreatdefense/malconv-keras-malware-benchmark
 ```
+
+<img src="./assets/bar.gif"> 
 
 
 ## :clipboard: ML Malware Detection Competition/EMBER Malware Analysis Environment
@@ -203,3 +214,5 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 ```powershell
 # docker run -it -h ember-malware-benchmark -v ${PWD}:/mnt/share cyberthreatdefense/ember-malware-benchmark
 ```
+
+<img src="./assets/bar.gif"> 
