@@ -90,11 +90,11 @@ docker pull cyberthreatdefense/manalyze-alpine
 Starting it up with the current working directory mounted as `/mnt/share` in the container:
 
 ```bash
-docker run -it -h manalyze-alpine -v `pwd`:/mnt/share cyberthreatdefense/manalyze-alpine
+docker run -it -h --name manalyze-alpine -v `pwd`:/mnt/share cyberthreatdefense/manalyze-alpine
 ```
 
 ```powershell
-docker run -it -h manalyze-alpine -v ${PWD}:/mnt/share cyberthreatdefense/manalyze-alpine
+docker run -it -h --name manalyze-alpine -v ${PWD}:/mnt/share cyberthreatdefense/manalyze-alpine
 ```
 
 Start the container
@@ -113,11 +113,11 @@ docker build . --file Dockerfile.ubuntu --tag cyberthreatdefense/manalyze-ubuntu
 Starting it up with the current working directory mounted as `/mnt/share` in the container:
 
 ```bash
-docker run -it -h manalyze-ubuntu -v `pwd`:/mnt/share cyberthreatdefense/manalyze-ubuntu
+docker run -it -h --name manalyze-ubuntu -v `pwd`:/mnt/share cyberthreatdefense/manalyze-ubuntu
 ```
 
 ```powershell
-docker run -it -h manalyze-ubuntu -v ${PWD}:/mnt/share cyberthreatdefense/manalyze-ubuntu
+docker run -it -h --name manalyze-ubuntu -v ${PWD}:/mnt/share cyberthreatdefense/manalyze-ubuntu
 ```
 
 Start the container
@@ -133,19 +133,30 @@ docker start -i manalyze-ubuntu
 Building the image:
 
 ```console
-# docker build . --file Dockerfile --tag cyberthreatdefense/pcap-extractor
+docker build . --file Dockerfile --tag cyberthreatdefense/pcap-extractor
 [...]
 <<<wait for a while>>>
 [...]
 ```
+or Pull the Image:
+
+```console
+docker pull cyberthreatdefense/pcap-extractor
+```
 
 Starting it up with the current working directory mounted as `/mnt/share` in the container:
 
-```console
-# docker run -it -h pcap-extractor -v `pwd`:/mnt/share cyberthreatdefense/pcap-extractor
+```bash
+docker run -it -h --name pcap-extractor -v `pwd`:/mnt/share cyberthreatdefense/pcap-extractor
 ```
 ```powershell
-# docker run -it -h pcap-extractor -v ${PWD}:/mnt/share cyberthreatdefense/pcap-extractor
+docker run -it -h --name pcap-extractor -v ${PWD}:/mnt/share cyberthreatdefense/pcap-extractor
+```
+
+Start the container
+
+```console
+docker start -i pcap-extractor
 ```
 
 ## :clipboard: ML Malware Detection Competition/MalConv-Keras Malware Analysis Environment
