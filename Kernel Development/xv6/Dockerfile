@@ -26,11 +26,11 @@ RUN apt-get update && apt-get install -y \
     gdb \
     make
 
-# Clone the xv6 repository
-RUN git clone https://github.com/mit-pdos/xv6-public.git /usr/src/xv6
-
 # Set the working directory
 WORKDIR /usr/src/xv6
+
+# Clone the xv6 repository
+RUN git clone https://github.com/mit-pdos/xv6-public.git /usr/src/xv6
 
 # Set the CFLAGS environment variable to disable the array-bounds warning2
 # error: array subscript -48806446 is outside array bounds of 'void[2147483647]'
@@ -42,5 +42,4 @@ RUN make
 RUN cp fs.img /mnt/shared/ && cp xv6.img /mnt/shared/
 
 # Set the default command to run when the container starts
-#CMD ["make", "qemu-nox"]
 CMD ["bash"]
