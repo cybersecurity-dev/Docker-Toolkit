@@ -6,6 +6,26 @@ import os
 import subprocess
 import hashlib
 
+
+import json
+
+
+def parse_diec_output(output_string):
+    start_index = output_string.find('{')
+    end_index = output_string.rfind('}') + 1 # +1 to include the closing }
+
+    if start_index != -1 and end_index != 0:
+        json_string = output_string[start_index:end_index]
+        try:
+            data = json.loads(json_string)
+            return data
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+            return json.loads({})
+    else:
+        print("Could not find JSON in the string.")
+        return json.loads({})
+
 def calculate_entropy(data):
     """Calculate Shannon entropy of a byte sequence."""
     if not data:
@@ -26,48 +46,98 @@ def calculate_sha256(fpath):
 
 def check_packed_with_die(pe_file_path):
     """Check if a PE file is packed using Detect-It-Easy (diec)..."""
+    compiler = ""
+    compiler_version = ""
+    sign_tool = ""
+    sign_tool_version = ""
+    linker_version = ""
+    linker = ""
+    is_packed = bool(False)
+    packer_name = ""
+    packer_version = ""
     try:
         file_sha256 = calculate_sha256(pe_file_path)
         result = subprocess.run(['diec.sh', '-j', pe_file_path], capture_output=True, text=True, check=True)
-        output = json.loads(result.stdout)
-        print(output)
-        file_info = output.get('files', [{}])[0]
-        is_packed = file_info.get('isPacked', False)
-        packer_type = file_info.get('packer', 'Unknown')
-        details = file_info.get('detects', [])
-        detail_str = '; '.join([d.get('name', '') for d in details]) if details else 'No packing info from DiE'
+        output = parse_diec_output(result.stdout)
+        #output = json.loads(result.stdout)
+        detects = output["detects"]
+        if detects:
+            first_detect = detects[0]
+            values = first_detect["values"]
+            
+            for item in values:
+                if item["type"] == "Compiler":
+                    compiler = item["name"]
+                    #compiler_string = item["string"]
+                    compiler_version = item["version"]
+                elif item["type"] == "Sign tool":
+                    sign_tool = item["name"]
+                    #sign_tool_string = item["string"]
+                    sign_tool_version = item["version"]
+                    #print(f"Sign Tool: {sign_tool_name}, {sign_tool_string}, Version: {sign_tool_version}")
+                elif item["type"] == "Linker":
+                    linker=item["name"]
+                    linker_version=item["version"]
+                elif item["type"] == "Packer":
+                    packer_name = item["name"]
+                    packer_version = item["version"]
+                    is_packed = bool(True)
+                elif item["type"] == "Archive":
+                    archive_name=item["name"]
+                    archive_version=item["version"]                
+        
+      
+
 
         return {
             'sha256' : file_sha256,
             'file_path': pe_file_path,
             'is_packed': is_packed,
-            'packer_type': packer_type if packer_type else 'Unknown',
-            'details': detail_str,
-            'pack_control_programme': 'Detect-It-Easy'
+            'packer_name': packer_name,
+            'packer_version': packer_version,
+            'compiler' : compiler,
+            'compiler_version' : compiler_version,
+            'sign_tool' : sign_tool,
+            'sign_tool_version' : sign_tool_version,
+            'linker' : linker,
+            'linker_version' : linker_version,
+            'pack_control_programme': 'DIE'
         }
     except subprocess.CalledProcessError as e:
         return {
             'sha256' : file_sha256,
             'file_path': pe_file_path,
-            'is_packed': False,
-            'packer_type': 'Error',
-            'details': f"DiE execution failed: {e.stderr}",
-            'pack_control_programme': 'Detect-It-Easy'
+            'is_packed': is_packed,
+            'packer_name': packer_name,
+            'packer_version': packer_version,
+            'compiler' : compiler,
+            'compiler_version' : compiler_version,
+            'sign_tool' : sign_tool,
+            'sign_tool_version' : sign_tool_version,
+            'linker' : linker,
+            'linker_version' : linker_version,
+            'pack_control_programme': 'DIE'
         }
     except Exception as e:
         return {
             'sha256' : file_sha256,
             'file_path': pe_file_path,
-            'is_packed': False,
-            'packer_type': 'Error',
-            'details': str(e),
-            'pack_control_programme': 'Detect-It-Easy'
+            'is_packed': is_packed,
+            'packer_name': packer_name,
+            'packer_version': packer_version,
+            'compiler' : compiler,
+            'compiler_version' : compiler_version,
+            'sign_tool' : sign_tool,
+            'sign_tool_version' : sign_tool_version,
+            'linker' : linker,
+            'linker_version' : linker_version,
+            'pack_control_programme': 'DIE'
         }
 
 def save_to_csv(results, output_file):
     """Save packing analysis results to CSV."""
     with open(output_file, 'w', newline='') as csvfile:
-        fieldnames = ['sha256', 'file_path', 'is_packed', 'packer_type', 'details', 'pack_control_programme']
+        fieldnames = ['sha256', 'file_path', 'is_packed', 'packer_name', 'packer_version', 'compiler', 'compiler_version', 'sign_tool', 'sign_tool_version', 'linker', 'linker_version', 'pack_control_programme']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for result in results:
