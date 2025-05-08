@@ -40,6 +40,8 @@ docker start -i autokeras
 
 ### :fast_forward: Quick Start
 
+[![dockeri.co](https://dockerico.blankenship.io/image/cyberthreatdefense/diec)](https://hub.docker.com/r/cyberthreatdefense/diec)
+
 Building the image:
 
 ```console
