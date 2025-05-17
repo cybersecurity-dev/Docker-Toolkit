@@ -3,6 +3,23 @@
 
 Reusable Docker Toolkit Scripting for Development Environment
 
+## Most used command
+### Get the output (logs) of the last run container
+Identify the last run container (_both running and stopped_)
+```concole
+docker ps -a
+docker ps -a --format "{{.ID}}\t{{.Names}}\t{{.Status}}" -n 1
+docker ps -lq
+```
+View the container's logs
+```concole
+docker logs <container_id_or_name>
+```
+
+```console
+LAST_CONTAINER_ID=$(docker ps -lq) && docker logs $LAST_CONTAINER_ID
+```
+
 ## :clipboard: Autokeras
 
 ### :fast_forward: Quick Start
