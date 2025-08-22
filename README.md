@@ -1,3 +1,7 @@
+<p align="center"><a href="https://github.com/cybersecurity-dev/awesome-docker">
+  <img width="35%" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/Docker_logo2.svg" />
+</a></p>
+
 # [Docker](https://github.com/cybersecurity-dev/awesome-docker) Toolkit [<img src="https://img.shields.io/badge/dockerhub-Docker_Toolkit-blue.svg?logo=Docker">](https://hub.docker.com/u/cyberthreatdefense)
 
 <p align="center">
