@@ -257,4 +257,16 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 
 <img src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/bar.gif">
 
+##
+
+### Contributing
+
+[Contributions of any kind welcome, just follow the guidelines](contributing.md)!
+
+### Contributors
+
+[Thanks goes to these contributors](https://github.com/cybersecurity-dev/Docker-Toolkit/graphs/contributors)!
+
 [🔼 Back to top](#docker-toolkit)
+
+
