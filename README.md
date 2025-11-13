@@ -265,6 +265,9 @@ Starting it up with the current working directory mounted as `/mnt/share` in the
 
 ##
 
+### My Awesome Lists
+You can access the my other awesome lists [here](https://cyberthreatdefence.com/my_awesome_lists)
+
 ### Contributing
 
 [Contributions of any kind welcome, just follow the guidelines](contributing.md)!
