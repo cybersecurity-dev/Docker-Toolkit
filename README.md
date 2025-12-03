@@ -1,8 +1,13 @@
-<p align="center"><a href="https://github.com/cybersecurity-dev/awesome-docker">
-  <img width="35%" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/Docker_logo2.svg" />
-</a></p>
+<div align="center">
+    <p align="center">
+        <a href="https://github.com/cybersecurity-dev/awesome-docker">
+          <img width="35%" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/Docker_logo2.svg" />
+        </a>
+    </p>
 
-# [Docker](https://github.com/cybersecurity-dev/awesome-docker) Toolkit [<img src="https://img.shields.io/badge/dockerhub-Docker_Toolkit-blue.svg?logo=Docker">](https://hub.docker.com/u/cyberthreatdefense)
+# **`Docker`** Toolkit [<img src="https://img.shields.io/badge/dockerhub-Docker_Toolkit-blue.svg?logo=Docker">](https://hub.docker.com/u/cyberthreatdefense)
+</div>
+
 [![FreeBSD](https://img.shields.io/badge/FreeBSD-AB2B28?style=for-the-badge&logo=freebsd&logoColor=white)]()
 [![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)]()
 [![Windows](https://custom-icon-badges.demolab.com/badge/Windows-0078D6?style=for-the-badge&logo=windows11&logoColor=white)]()
