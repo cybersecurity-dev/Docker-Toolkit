@@ -25,6 +25,19 @@
 </p>
 
 Reusable Docker Toolkit Scripting for Development Environment
+## Docker Help
+
+- `attach` : connect to your Docker container
+    ```bash
+    docker attach <container-id>
+    ```
+    if your container is running a webserver, [`docker attach`](https://stackoverflow.com/questions/30172605/how-do-i-get-a-console-like-connection-into-a-docker-containers-shell) will probably connect you to the stdout of the web server process. It won't necessarily give you a shell.
+  ```bash
+  docker exec -it <container-id> sh
+  ```
+-
+-
+-  
 
 ## Most used command
 ### Get the output (logs) of the last run container
