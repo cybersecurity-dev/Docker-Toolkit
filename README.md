@@ -25,17 +25,28 @@
 </p>
 
 Reusable Docker Toolkit Scripting for Development Environment
+
 ## Docker Help
 
-- `attach` : _Attach local standard input, output, and error streams to a running container_
-    ```bash
-    docker attach <container-id>
-    ```
+### Common Commands:
 - `exec` :  _Execute a command in a running container_
   if your container is running a webserver, [`docker attach`](https://stackoverflow.com/questions/30172605/how-do-i-get-a-console-like-connection-into-a-docker-containers-shell) will probably connect you to the stdout of the web server process. It won't necessarily give you a shell.
     ```bash
     docker exec -it <container-id> sh
     ```
+- `ps` : List containers
+    ```bash
+    docker ps
+    ```
+    ```bash
+    docker ps -a
+    ```
+- `image` : _List images_
+    ```bash
+    docker image ls
+    ```
+
+### Management Commands:
 - `container` : _Manage containers_
   List 
     ```bash
@@ -44,15 +55,14 @@ Reusable Docker Toolkit Scripting for Development Environment
     ```bash
     docker container ls -a
     ```
-- `image` : _List images_
+### Commands:
+- `attach` : _Attach local standard input, output, and error streams to a running container_
     ```bash
-    docker image ls
+    docker attach <container-id>
     ```
-- 
-
-
 
 ## Most used command
+
 ### Get the output (logs) of the last run container
 Identify the last run container (_both running and stopped_)
 ```concole
